@@ -14,7 +14,7 @@ public class GeoLocationController {
     @GetMapping("/location")
     @ResponseBody
     public ResponseEntity requestToJoin(@RequestParam String origin, @RequestParam String destination, @RequestParam String stop){
-        googleMapsService.getAddedTime(origin, stop, destination);
-        return ResponseEntity.ok("GeoLocation Data created");
+        Long time  = googleMapsService.getAddedTime(origin, stop, destination);
+        return ResponseEntity.ok(time.toString());
     }
 }
