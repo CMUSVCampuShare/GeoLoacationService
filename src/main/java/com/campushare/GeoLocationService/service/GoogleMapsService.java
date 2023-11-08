@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class GoogleMapsService {
+public class GoogleMapsService implements GeoLocationService{
     private static final String API_KEY = "AIzaSyALoxyWDM0Ut92xSQyZyVS_wVDMXV9SUPg";
     private static final String DIRECTIONS_API_URL = "https://maps.googleapis.com/maps/api/directions/json";
 
+    @Override
     public Long getAddedTime(String origin, String stop, String destination) {
         Long timeWithoutStop = calculateTravelTime(origin, destination);
         Long timeWithStop = calculateTravelTime(origin, stop, destination);
