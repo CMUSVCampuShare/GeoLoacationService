@@ -1,5 +1,7 @@
 package com.campushare.GeoLocationService.service;
 
+import com.campushare.GeoLocationService.model.GeoLocationData;
+
 public interface GeoLocationService {
-    Long getAddedTime(String origin, String stop, String destination);
+    GeoLocationData getGeoLocationData(String origin, String stop, String destination);
 }
