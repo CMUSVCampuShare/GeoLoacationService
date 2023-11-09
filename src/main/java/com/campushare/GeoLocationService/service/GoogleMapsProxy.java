@@ -35,4 +35,8 @@ public class GoogleMapsProxy implements GeoLocationService{
     public void clearCache() {
         this.geoLocationCache = new HashMap<>();
     }
+
+    public int getCacheLength() {
+        return this.geoLocationCache.size();
+    }
 }
