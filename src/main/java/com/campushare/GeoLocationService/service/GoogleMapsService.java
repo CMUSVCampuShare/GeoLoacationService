@@ -14,10 +14,8 @@ public class GoogleMapsService implements GeoLocationService{
         Long timeWithoutStop = calculateTravelTime(origin, destination);
         GeoLocationData geoLocationDataForStop = calculateTravelTime(origin, stop, destination);
         Long timeWithStop = geoLocationDataForStop.getAddedTime();
-        System.out.println(timeWithoutStop);
-        System.out.println(timeWithStop);
+
         if (timeWithoutStop != null && timeWithStop != null) {
-            System.out.println(timeWithStop - timeWithoutStop);
             geoLocationDataForStop.setAddedTime(timeWithStop - timeWithoutStop);
             return geoLocationDataForStop;
         } else {
@@ -45,14 +43,14 @@ public class GoogleMapsService implements GeoLocationService{
         return restTemplate.getForObject(url, DirectionsResponse.class);
     }
 
-    private Long extractTravelTime(DirectionsResponse response) {
+    public Long extractTravelTime(DirectionsResponse response) {
         if (response != null && response.getRoutes().length > 0) {
             Route selectedRoute = response.getRoutes()[0];
             int numberOfLegs = selectedRoute.getLegs().length;
 
             Long time = 0L;
             for(int i =0; i< numberOfLegs; i++){
-                String duration = selectedRoute.getLegs()[0].getDuration().getText();
+                String duration = selectedRoute.getLegs()[i].getDuration().getText();
                 String[] splitDuration = duration.split(" ");
                 time = time + Long.parseLong(splitDuration[0]);
             }
@@ -63,7 +61,7 @@ public class GoogleMapsService implements GeoLocationService{
         }
     }
 
-    private Coordinates extractCoordinates(DirectionsResponse response) {
+    public Coordinates extractCoordinates(DirectionsResponse response) {
         if (response != null && response.getRoutes().length > 0) {
             Route selectedRoute = response.getRoutes()[0];
             Leg firstLeg = selectedRoute.getLegs()[0];
