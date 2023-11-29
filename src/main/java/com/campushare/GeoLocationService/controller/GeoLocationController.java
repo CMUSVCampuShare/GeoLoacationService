@@ -14,8 +14,8 @@ public class GeoLocationController {
 
     @GetMapping("/location")
     @ResponseBody
-    public ResponseEntity requestToJoin(@RequestParam String origin, @RequestParam String destination, @RequestParam String stop){
-        GeoLocationData time  = googleMapsProxy.getGeoLocationData(origin, stop, destination);
-        return ResponseEntity.ok(time);
+    public ResponseEntity getGeoLocationData(@RequestParam String origin, @RequestParam String destination, @RequestParam String stop){
+        GeoLocationData geoLocationData  = googleMapsProxy.getGeoLocationData(origin, stop, destination);
+        return ResponseEntity.ok(geoLocationData);
     }
 }
